@@ -6,10 +6,36 @@
   --disseminate: #ff3300;
   --deposit: #ff9933;
   --indepth: #F1F1F1;
+
+  /* Base font sizes */
+  --font-size-base: 16px;
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 26px;
+  --font-size-h5: 20px;
+  --font-size-page-title: 80px;
+  --font-size-page-subtitle: 20px;
+  --font-size-small: 14px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 14px;
+    --font-size-h1: 1.8rem;
+    --font-size-h2: 1.5rem;
+    --font-size-h3: 1.2rem;
+    --font-size-h4: 22px;
+    --font-size-h5: 18px;
+    --font-size-page-title: 40px;
+    --font-size-page-subtitle: 16px;
+    --font-size-small: 12px;
+  }
 }
 
 body {
-  font-family: Helvetica, sans-serif, sans-serif !important;
+  font-family: Helvetica, sans-serif !important;
+  font-size: var(--font-size-base);
 }
 
 div.page-body {
@@ -118,25 +144,32 @@ a {
 /* ================= HEADER ================= */
 header {
   min-height: calc(100vh - 80px);
-  padding: 2em 3em; /* aumenta leggermente il padding verticale */
+  padding: 1em 2em;
   display: flex;
-  align-items: flex-end;
-  flex-direction: column; /* più controllabile su mobile */
-  justify-content: flex-end;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: center;
   background-color: #191919;
 }
 
 /* HEADER RESPONSIVE */
 @media (max-width: 992px) {
   header {
-    min-height: 60vh; /* non troppo grande su tablet e mobile */
-    padding: 2em 1.5em;
+    min-height: 60vh;
+    padding: 2em;
     align-items: flex-start;
     justify-content: flex-start;
   }
 
+  .main-title.container {
+    border-right: none;
+    border-bottom: none;
+    padding-right: 0;
+    padding-bottom: 2em;
+  }
+
   .page-title {
-    font-size: clamp(2rem, 8vw, 50px); /* ridimensionamento fluido */
+    font-size: clamp(2rem, 8vw, 50px);
   }
 
   .page-subtitle {
@@ -157,16 +190,18 @@ header {
 }
 
 .main-title.container {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 3em;
 }
 
 .main-title > div {
-    position: absolute;
-    bottom: 0;
+  position: static;
 }
 
 .page-title {
-  font-size: 80px;
+  font-size: var(--font-size-page-title);
   font-weight: bold;
   margin: 0;
   line-height: 1em;
@@ -187,7 +222,7 @@ header {
 }
 
 .page-subtitle {
-  font-size: 20px;
+  font-size: var(--font-size-page-subtitle);
   color: rgba(255, 255, 255, 0.6);
   font-weight: 400;
   margin-top: 0.5em;
@@ -263,15 +298,26 @@ header {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .page-title {
-    font-size: 40px;
-  }
-  .page-subtitle {
-    font-size: 16px;
-  }
   .button-container {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* Apply responsive font sizes */
+  h1 {
+    font-size: var(--font-size-h1);
+  }
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+  h3:not(.recommendation-link > h3) {
+    font-size: var(--font-size-h3);
+  }
+  p, li {
+    font-size: var(--font-size-base);
+  }
+  .page-body p, .page-body li {
+    font-size: var(--font-size-base);
   }
 }
 
@@ -303,19 +349,19 @@ h1 + p, h2 + p {
 }
 
 p, li {
-    color: #444444;
-    font-size: 18px;
+    color: #333333;
+    font-size: var(--font-size-base);
     line-height: 30px;
-    font-weight: 100;
+    font-weight: 400;
 }
 
 .page-body p, .page-body li {
-    font-size: 18px;
+    font-size: var(--font-size-base);
 }
 
 .reference {
     padding-top: 1em;
-    font-size: 20px;
+    font-size: var(--font-size-h3);
 }
 
 .bold {
@@ -330,7 +376,7 @@ strong {
 
 .topic {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 18px;
+    font-size: var(--font-size-base);
     color: var(--atlas);
     line-height: 0;
 }
@@ -372,6 +418,12 @@ div.acc {
   margin-top: 3em !important;
   margin-left: 1em !important;
   border-top: 1px solid #ccc !important;
+}
+
+@media (max-width: 768px) {
+  div.acc {
+    margin-left: 0 !important;
+  }
 }
 
 div.acc .acc-item {
@@ -446,20 +498,20 @@ li > .tag {
 
 /* HEADINGS */
 h1 {
-    font-size: 60px;
+    font-size: var(--font-size-h1);
     font-weight: 700;
 }
 
 h2 {
   margin-top: 2em;
   font-weight: 600;
-  font-size: 28px;
+  font-size: var(--font-size-h2);
 }
 
 h3:not(.recommendation-link > h3) {
     margin-top: 2em;
   font-weight: 800;
-  font-size: 22px;
+  font-size: var(--font-size-h3);
   font-family: 'Rajdhani', sans-serif;
   color: var(--atlas);
 }
@@ -467,14 +519,14 @@ h3:not(.recommendation-link > h3) {
 h4 {
   margin-top: 1.5em;
   margin-bottom: 1.2em;
-  font-size: 26px;
+  font-size: var(--font-size-h4);
   color: black;
 }
 
 h5 {
     margin-top: 2em;
   font-weight: 600;
-  font-size: 20px;
+  font-size: var(--font-size-h5);
   font-family: 'Rajdhani', sans-serif;
   color: #191919;
 }
@@ -506,7 +558,7 @@ div[type="in-depth"] {
 
 
 .recommendation-link::before {
-  font-family: 'Material Symbols Sharp';
+    font-family: 'Material Symbols Sharp', sans-serif;
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 72;
   position: absolute;
   left: -100px;
@@ -674,10 +726,6 @@ div[type="in-depth"] {
     justify-content: flex-start;
   }
 
-  .main-title > div {
-    position: static; /* remove absolute positioning */
-  }
-
   .main-title.container,
   .carousel-container {
     width: 100% !important;
@@ -717,6 +765,30 @@ div[type="in-depth"] {
 /* CARDS */
 .row-cards {
     margin-top: 2em;
+}
+
+.row-cards > div {
+  cursor: pointer;
+}
+
+.card-content-mobile-inline {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .row.row-cards + .row {
+    display: none;
+  }
+
+  .card-content-mobile-inline {
+    display: block;
+    border: 1px solid #ddd;
+    padding: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1em;
+    background: #fff;
+  }
 }
 
 .res-card {

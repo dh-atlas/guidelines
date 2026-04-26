@@ -38,6 +38,19 @@ $(document).ready(function () {
     });
 
     // card content
+    function showMobileInline($card) {
+        if ($(window).width() < 768) {
+            var contentId = $card.data("content");
+            $(".card-content-mobile-inline").remove();
+            var $clone = $("#" + contentId)
+                .clone()
+                .removeAttr("id")
+                .removeClass("card-content")
+                .addClass("card-content-mobile-inline col-12");
+            $card.after($clone);
+        }
+    }
+
     $(".res-card").click(function() {
         var contentId = $(this).data("content");
 
@@ -46,6 +59,17 @@ $(document).ready(function () {
 
         $(".card-content").removeClass("active");
         $("#" + contentId).addClass("active");
+
+        showMobileInline($(this));
+    });
+
+    // Initialize mobile inline for the default active card
+    showMobileInline($(".res-card.active").first());
+
+    $(window).on("resize", function() {
+        if ($(window).width() >= 768) {
+            $(".card-content-mobile-inline").remove();
+        }
     });
 
 
